@@ -34,7 +34,13 @@ class mod_turnitintooltwo_mod_form extends moodleform_mod {
     private $turnitintooltwo;
 
     public function definition() {
-        global $DB, $USER, $COURSE;
+        global $DB, $USER, $COURSE, $PAGE;
+
+        // Abort if output of page has begun as otherwise it will break page.
+        // This is most likely because of the redesign of the Default activity completion page in Moodle 4.3 (MDL-78528).
+        if ($PAGE->state > 0) {
+            return false;
+        }
 
         // Module string is useful for product support.
         $modulestring = '<!-- Turnitin Moodle Direct Version: '.turnitintooltwo_get_version().' - (';
