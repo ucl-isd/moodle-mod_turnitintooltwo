@@ -27,7 +27,7 @@ if (!defined('MOODLE_INTERNAL')) {
 require_once($CFG->dirroot.'/course/moodleform_mod.php');
 require_once(__DIR__.'/lib.php');
 
-define('TII_INTRO_CHARACTER_LIMIT', 1000);
+define('TII_INTRO_CHARACTER_LIMIT', 1000000);
 
 class mod_turnitintooltwo_mod_form extends moodleform_mod {
 
