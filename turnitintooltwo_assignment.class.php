@@ -471,6 +471,23 @@ class turnitintooltwo_assignment {
         return $truncatedtitle;
     }
 
+        /**
+     * Truncate assignment instructions to Turnitin's limit.
+     *
+     * @param string $intro
+     * @param int $limit
+     * @return string
+     */
+    public static function truncate_instructions($intro, $limit = 1000) {
+        $intro = strip_tags($intro);
+    
+        if (mb_strlen($intro, 'UTF-8') > $limit) {
+            $intro = mb_substr($intro, 0, $limit, 'UTF-8');
+        }
+    
+        return $intro;
+    }
+
     /**
      * Edit the course end date in Turnitin
      *
@@ -760,7 +777,7 @@ class turnitintooltwo_assignment {
             $assignment->setDueDate(gmdate("Y-m-d\TH:i:s\Z", $this->turnitintooltwo->$attribute));
             $attribute = "dtpost".$i;
             $assignment->setFeedbackReleaseDate(gmdate("Y-m-d\TH:i:s\Z", $this->turnitintooltwo->$attribute));
-            $assignment->setInstructions(strip_tags($this->turnitintooltwo->intro));
+            $assignment->setInstructions(self::truncate_instructions($this->turnitintooltwo->intro));
             $assignment->setAuthorOriginalityAccess($this->turnitintooltwo->studentreports);
             $assignment->setRubricId((!empty($this->turnitintooltwo->rubric)) ? $this->turnitintooltwo->rubric : '');
             $assignment->setSubmitPapersTo($this->turnitintooltwo->submitpapersto);
@@ -1350,7 +1367,7 @@ class turnitintooltwo_assignment {
             $assignment->setClassId($course->turnitin_cid);
             $assignment->setAuthorOriginalityAccess($this->turnitintooltwo->studentreports);
 
-            $assignment->setInstructions(strip_tags($this->turnitintooltwo->intro));
+            $assignment->setInstructions(self::truncate_instructions($this->turnitintooltwo->intro));
 
             $assignment->setRubricId((!empty($this->turnitintooltwo->rubric)) ? $this->turnitintooltwo->rubric : '');
             $assignment->setSubmitPapersTo($this->turnitintooltwo->submitpapersto);
