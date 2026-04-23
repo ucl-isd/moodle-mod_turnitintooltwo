@@ -480,7 +480,7 @@ class turnitintooltwo_assignment {
     public static function truncate_instructions($intro) {
         $intro = strip_tags($intro);
     
-        if mb_strlen($intro, 'UTF-8') > TII_INTRO_CHARACTER_LIMIT) {
+        if (mb_strlen($intro, 'UTF-8') > TII_INTRO_CHARACTER_LIMIT) {
             $intro = mb_substr($intro, 0, TII_INTRO_CHARACTER_LIMIT, 'UTF-8');
         }
     
