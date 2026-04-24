@@ -27,8 +27,6 @@ if (!defined('MOODLE_INTERNAL')) {
 require_once($CFG->dirroot.'/course/moodleform_mod.php');
 require_once(__DIR__.'/lib.php');
 
-define('TII_INTRO_CHARACTER_LIMIT', 1000);
-
 class mod_turnitintooltwo_mod_form extends moodleform_mod {
 
     private $updating;
@@ -599,14 +597,6 @@ class mod_turnitintooltwo_mod_form extends moodleform_mod {
         $errors = parent::validation($data, $files);
 
         $partnames = array();
-
-        // $formatparams = new stdClass();
-        // $formatparams->field = get_string('turnitintooltwointro', 'turnitintooltwo');
-        // $formatparams->length = TII_INTRO_CHARACTER_LIMIT;
-        // $formatparams->inputlength = mb_strlen(strip_tags($data['introeditor']['text']));
-        // if ($formatparams->inputlength > TII_INTRO_CHARACTER_LIMIT) {
-        //   $errors['introeditor'] = get_string('maxlengthwithinput', 'turnitintooltwo', $formatparams);
-        // }
 
         foreach ($data as $name => $value) {
             // Get part names from array of data.

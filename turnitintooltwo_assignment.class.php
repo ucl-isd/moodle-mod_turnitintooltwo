@@ -477,11 +477,11 @@ class turnitintooltwo_assignment {
      * @param string $intro
      * @return string
      */
-    public static function truncate_instructions($intro) {
+    private static function truncate_intro($intro) {
         $intro = strip_tags($intro);
     
         if (mb_strlen($intro, 'UTF-8') > TII_INTRO_CHARACTER_LIMIT) {
-            $intro = mb_substr($intro, 0, TII_INTRO_CHARACTER_LIMIT, 'UTF-8');
+            $intro = mb_substr($intro, 0, TII_INTRO_CHARACTER_LIMIT - 3, 'UTF-8') . '...';
         }
     
         return $intro;
@@ -776,7 +776,7 @@ class turnitintooltwo_assignment {
             $assignment->setDueDate(gmdate("Y-m-d\TH:i:s\Z", $this->turnitintooltwo->$attribute));
             $attribute = "dtpost".$i;
             $assignment->setFeedbackReleaseDate(gmdate("Y-m-d\TH:i:s\Z", $this->turnitintooltwo->$attribute));
-            $assignment->setInstructions($this->truncate_instructions($this->turnitintooltwo->intro));
+            $assignment->setInstructions($this->truncate_intro($this->turnitintooltwo->intro));
             $assignment->setAuthorOriginalityAccess($this->turnitintooltwo->studentreports);
             $assignment->setRubricId((!empty($this->turnitintooltwo->rubric)) ? $this->turnitintooltwo->rubric : '');
             $assignment->setSubmitPapersTo($this->turnitintooltwo->submitpapersto);
@@ -1366,7 +1366,7 @@ class turnitintooltwo_assignment {
             $assignment->setClassId($course->turnitin_cid);
             $assignment->setAuthorOriginalityAccess($this->turnitintooltwo->studentreports);
 
-            $assignment->setInstructions($this->truncate_instructions($this->turnitintooltwo->intro));
+            $assignment->setInstructions($this->truncate_intro($this->turnitintooltwo->intro));
 
             $assignment->setRubricId((!empty($this->turnitintooltwo->rubric)) ? $this->turnitintooltwo->rubric : '');
             $assignment->setSubmitPapersTo($this->turnitintooltwo->submitpapersto);
