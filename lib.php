@@ -113,7 +113,6 @@ function turnitintooltwo_supports($feature) {
     defined("FEATURE_SHOW_DESCRIPTION") or define("FEATURE_SHOW_DESCRIPTION", null);
     switch($feature) {
         case FEATURE_GROUPS:
-        case FEATURE_GROUPMEMBERSONLY:
         case FEATURE_MOD_INTRO:
         case FEATURE_COMPLETION_TRACKS_VIEWS:
         case FEATURE_GRADE_HAS_GRADE:
@@ -324,7 +323,7 @@ function turnitintooltwo_delete_instance($id) {
  * assignments on Turnitin and replace the turnitin ids for those parts in the database.
  *
  * @global object
- * @param var $courseid The course ID for the course to reset
+ * @param int $courseid The course ID for the course to reset
  * @param string $action The action to use OLDCLASS or NEWCLASS
  * @param int $renewdates The action to use new assignment dates or not.
  * @return array The status array to pass to turnitintooltwo_reset_userdata
@@ -1802,7 +1801,7 @@ function turnitintooltwo_delete_event($turnitintooltwo, $part) {
   global $DB, $USER;
 
   try {
-    $DB->delete_records_select("event", "modulename = ? AND userid = ? AND name = ?", 
+    $DB->delete_records_select("event", "modulename = ? AND userid = ? AND name = ?",
       [ "turnitintooltwo", $USER->id, $turnitintooltwo->name." - ".$part->partname ]);
   } catch (Exception $e) {
       turnitintooltwo_comms::handle_exceptions($e, 'turnitintooltwoupdateerror', false);
